@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+[data-theme="matrix"] {
+  --color-primary: #00ff41;
+  --color-secondary: #008f11;
+  --color-bg: #0d0d0d;
+  --color-surface: #0a0a0a;
+  --color-border: #00ff41;
+  --color-glow: rgba(0, 255, 65, 0.4);
+  --color-text: #00ff41;
+  --color-text-dim: #008f11;
+}
+
+[data-theme="phosphor"] {
+  --color-primary: #39ff14;
+  --color-secondary: #1a7a0a;
+  --color-bg: #0a0a0a;
+  --color-surface: #0d0d0d;
+  --color-border: #39ff14;
+  --color-glow: rgba(57, 255, 20, 0.4);
+  --color-text: #39ff14;
+  --color-text-dim: #1a7a0a;
+}
+
+[data-theme="amber"] {
+  --color-primary: #ffb000;
+  --color-secondary: #7a5500;
+  --color-bg: #0a0800;
+  --color-surface: #0d0a00;
+  --color-border: #ffb000;
+  --color-glow: rgba(255, 176, 0, 0.4);
+  --color-text: #ffb000;
+  --color-text-dim: #7a5500;
+}
+
+[data-theme="white"] {
+  --color-primary: #ffffff;
+  --color-secondary: #888888;
+  --color-bg: #111111;
+  --color-surface: #1a1a1a;
+  --color-border: #ffffff;
+  --color-glow: rgba(255, 255, 255, 0.2);
+  --color-text: #ffffff;
+  --color-text-dim: #888888;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-family-terminal: var(--font-terminal);
+  --font-family-mono: var(--font-mono);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-border-theme: var(--color-border);
+  --color-glow: var(--color-glow);
+  --color-text-theme: var(--color-text);
+  --color-text-dim: var(--color-text-dim);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }

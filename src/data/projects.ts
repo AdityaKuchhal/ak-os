@@ -1,0 +1,112 @@
+import type { Project } from '@/types';
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    name: 'Financial Data Dashboard & Trade Tracker',
+    description:
+      'Full-stack financial dashboard fetching live market data via REST APIs, displaying portfolio positions, transaction history, and P&L summaries. PostgreSQL data model for transactions, positions, and price history. Containerized with Docker, CI/CD via GitHub Actions.',
+    stack: [
+      'Python',
+      'FastAPI',
+      'React',
+      'TypeScript',
+      'PostgreSQL',
+      'PyTest',
+      'Docker',
+      'REST APIs',
+    ],
+    role: 'Solo developer',
+    outcomes:
+      'End-to-end financial data workflow with automated test coverage across API and data layers.',
+    repo: 'TBD',
+  },
+  {
+    id: 2,
+    name: 'Automated Test Framework for ML Pipeline',
+    description:
+      'Reusable automated testing framework for a production ML inference pipeline. Covers data validation, model accuracy regression, API response testing, and performance benchmarking. Selenium E2E tests for front-end visualization components. Automated test reports on every CI/CD run.',
+    stack: [
+      'Python',
+      'PyTest',
+      'Selenium',
+      'FastAPI',
+      'PostgreSQL',
+      'GitHub Actions',
+      'AWS',
+    ],
+    role: 'Solo developer',
+    outcomes:
+      'Full regression coverage surfacing gaps and failures automatically.',
+    repo: 'TBD',
+  },
+  {
+    id: 3,
+    name: 'RAG-Powered Question Answering System',
+    description:
+      'RAG pipeline with automated PyTest suites covering pipeline accuracy, retrieval quality, latency benchmarks, and API reliability. Deployed on AWS Lambda handling 500+ queries/day at sub-2-second latency.',
+    stack: [
+      'Python',
+      'LangChain',
+      'OpenAI API',
+      'Pinecone',
+      'FastAPI',
+      'PyTest',
+      'AWS Lambda',
+    ],
+    role: 'Solo developer',
+    outcomes:
+      '500+ queries/day at sub-2s latency with full automated test coverage.',
+    repo: 'TBD',
+  },
+  {
+    id: 4,
+    name: 'Coming Soon',
+    description: 'Project details coming soon.',
+    stack: [],
+    role: '',
+    outcomes: '',
+    repo: '',
+    placeholder: true,
+  },
+  {
+    id: 5,
+    name: 'Coming Soon',
+    description: 'Project details coming soon.',
+    stack: [],
+    role: '',
+    outcomes: '',
+    repo: '',
+    placeholder: true,
+  },
+  {
+    id: 6,
+    name: 'Coming Soon',
+    description: 'Project details coming soon.',
+    stack: [],
+    role: '',
+    outcomes: '',
+    repo: '',
+    placeholder: true,
+  },
+  {
+    id: 7,
+    name: 'Coming Soon',
+    description: 'Project details coming soon.',
+    stack: [],
+    role: '',
+    outcomes: '',
+    repo: '',
+    placeholder: true,
+  },
+  {
+    id: 8,
+    name: 'Coming Soon',
+    description: 'Project details coming soon.',
+    stack: [],
+    role: '',
+    outcomes: '',
+    repo: '',
+    placeholder: true,
+  },
+];
