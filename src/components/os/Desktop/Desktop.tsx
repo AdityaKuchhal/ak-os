@@ -2,9 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 import { startBinaryWallpaper } from '@/lib/wallpapers/binary';
+import { useWindowManager } from '@/lib/hooks/useWindowManager';
+import Window from '@/components/shared/Window/Window';
 
 export default function Desktop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { windows, closeWindow, minimizeWindow, maximizeWindow, focusWindow } =
+    useWindowManager();
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -73,8 +77,21 @@ export default function Desktop() {
           }}
         />
 
-        {/* z-40: Window layer placeholder */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 40 }} />
+        {/* z-40: Window layer */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 40 }}>
+          {windows
+            .filter((w) => !w.isMinimized)
+            .map((w) => (
+              <Window
+                key={w.id}
+                win={w}
+                onClose={closeWindow}
+                onMinimize={minimizeWindow}
+                onMaximize={maximizeWindow}
+                onFocus={focusWindow}
+              />
+            ))}
+        </div>
       </div>
     </>
   );
