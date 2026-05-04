@@ -32,7 +32,9 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
   const [visibleCount, setVisibleCount] = useState(0);
   const [fading, setFading] = useState(false);
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     if (localStorage.getItem(BOOT_STORAGE_KEY) === 'skip') {
@@ -53,7 +55,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
     );
 
     return () => timers.forEach(clearTimeout);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

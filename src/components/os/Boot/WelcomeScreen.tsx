@@ -14,7 +14,9 @@ function formatTime(date: Date): string {
 export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
   const [clock, setClock] = useState(() => formatTime(new Date()));
   const onEnterRef = useRef(onEnter);
-  onEnterRef.current = onEnter;
+  useEffect(() => {
+    onEnterRef.current = onEnter;
+  }, [onEnter]);
 
   useEffect(() => {
     const interval = setInterval(() => {
