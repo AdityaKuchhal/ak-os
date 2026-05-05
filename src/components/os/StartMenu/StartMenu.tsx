@@ -12,7 +12,9 @@ interface StartMenuProps {
 export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
-  onCloseRef.current = onClose;
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
