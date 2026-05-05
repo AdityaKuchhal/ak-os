@@ -7,6 +7,7 @@ import About from '@/components/apps/About/About';
 import Resume from '@/components/apps/Resume/Resume';
 import Projects from '@/components/apps/Projects/Projects';
 import Experience from '@/components/apps/Experience/Experience';
+import TechStack from '@/components/apps/TechStack/TechStack';
 
 interface StartMenuProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -57,6 +58,9 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
     } else if (label === 'Logs') {
       title = 'SYSTEM_LOGS.TXT';
       node = <Experience />;
+    } else if (label === 'Skills') {
+      title = 'TECH_STACK.CFG';
+      node = <TechStack />;
     }
 
     openWindow(title, node);
