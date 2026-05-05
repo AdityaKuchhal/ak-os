@@ -6,6 +6,8 @@ import { APP_LIST } from '@/lib/constants/apps';
 import DesktopIcon from '@/components/os/DesktopIcon/DesktopIcon';
 import About from '@/components/apps/About/About';
 import Resume from '@/components/apps/Resume/Resume';
+import Projects from '@/components/apps/Projects/Projects';
+import Experience from '@/components/apps/Experience/Experience';
 
 interface DesktopIconGridProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -35,6 +37,12 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
     } else if (label === 'Resume') {
       title = 'RESUME.EXE';
       node = <Resume />;
+    } else if (label === 'Projects') {
+      title = 'PROJECTS.EXE';
+      node = <Projects />;
+    } else if (label === 'Logs') {
+      title = 'SYSTEM_LOGS.TXT';
+      node = <Experience />;
     }
 
     openWindow(title, node);
