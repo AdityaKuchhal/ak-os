@@ -84,7 +84,7 @@ export default function Desktop() {
         />
 
         {/* z-40: Window layer */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 40 }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 40, pointerEvents: 'none' }}>
           {windows
             .filter((w) => !w.isMinimized)
             .map((w) => (

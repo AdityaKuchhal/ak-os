@@ -64,6 +64,7 @@ export default function Window({
         zIndex: win.zIndex,
         display: 'flex',
         flexDirection: 'column',
+        pointerEvents: 'auto',
       }
     : {
         position: 'absolute',
@@ -74,6 +75,7 @@ export default function Window({
         zIndex: win.zIndex,
         display: 'flex',
         flexDirection: 'column',
+        pointerEvents: 'auto',
       };
 
   return (
