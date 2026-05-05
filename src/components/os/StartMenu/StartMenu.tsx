@@ -5,6 +5,8 @@ import type { ReactNode } from 'react';
 import { APP_LIST, ASCII_ICONS } from '@/lib/constants/apps';
 import About from '@/components/apps/About/About';
 import Resume from '@/components/apps/Resume/Resume';
+import Projects from '@/components/apps/Projects/Projects';
+import Experience from '@/components/apps/Experience/Experience';
 
 interface StartMenuProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -49,6 +51,12 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
     } else if (label === 'Resume') {
       title = 'RESUME.EXE';
       node = <Resume />;
+    } else if (label === 'Projects') {
+      title = 'PROJECTS.EXE';
+      node = <Projects />;
+    } else if (label === 'Logs') {
+      title = 'SYSTEM_LOGS.TXT';
+      node = <Experience />;
     }
 
     openWindow(title, node);
