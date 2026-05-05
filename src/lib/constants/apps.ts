@@ -4,6 +4,23 @@ export interface AppEntry {
   component: string;
 }
 
+export const ASCII_ICONS: Record<string, string> = {
+  Terminal: '>_',
+  Files: '[F]',
+  Projects: '[P]',
+  Logs: '[L]',
+  About: '[A]',
+  Skills: '[S]',
+  Radar: '[R]',
+  Awards: '[W]',
+  Resume: '[D]',
+  Code: '{ }',
+  Display: '[M]',
+  Tetris: '[T]',
+  Snake: '[~]',
+  Timeline: '[>]',
+};
+
 export const APP_LIST: AppEntry[] = [
   { id: 'terminal', label: 'Terminal', component: 'Terminal' },
   { id: 'files', label: 'Files', component: 'FileManager' },
