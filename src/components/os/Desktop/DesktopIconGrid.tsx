@@ -4,6 +4,8 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { APP_LIST } from '@/lib/constants/apps';
 import DesktopIcon from '@/components/os/DesktopIcon/DesktopIcon';
+import About from '@/components/apps/About/About';
+import Resume from '@/components/apps/Resume/Resume';
 
 interface DesktopIconGridProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -13,8 +15,8 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleOpen = (label: string) => {
-    openWindow(
-      label,
+    let title = label;
+    let node: ReactNode = (
       <div
         style={{
           padding: '1rem',
@@ -26,6 +28,16 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
         {label} — coming soon
       </div>
     );
+
+    if (label === 'About') {
+      title = 'ABOUT_ME.INFO';
+      node = <About />;
+    } else if (label === 'Resume') {
+      title = 'RESUME.EXE';
+      node = <Resume />;
+    }
+
+    openWindow(title, node);
   };
 
   return (

@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { APP_LIST, ASCII_ICONS } from '@/lib/constants/apps';
+import About from '@/components/apps/About/About';
+import Resume from '@/components/apps/Resume/Resume';
 
 interface StartMenuProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -27,8 +29,8 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
   }, []);
 
   const handleAppClick = (label: string) => {
-    openWindow(
-      label,
+    let title = label;
+    let node: ReactNode = (
       <div
         style={{
           padding: '1rem',
@@ -40,6 +42,16 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
         {label} — coming soon
       </div>
     );
+
+    if (label === 'About') {
+      title = 'ABOUT_ME.INFO';
+      node = <About />;
+    } else if (label === 'Resume') {
+      title = 'RESUME.EXE';
+      node = <Resume />;
+    }
+
+    openWindow(title, node);
     onCloseRef.current();
   };
 
