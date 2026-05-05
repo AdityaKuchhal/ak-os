@@ -72,7 +72,6 @@ export default function Taskbar({
             ...btnBase,
             color: 'var(--color-primary)',
             border: '1px solid var(--color-primary)',
-            fontWeight: 'bold',
           }}
         >
           [ START ]

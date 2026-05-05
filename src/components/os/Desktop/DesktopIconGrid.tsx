@@ -47,6 +47,8 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
           width: 84,
           overflowY: 'auto',
           scrollbarWidth: 'none',
+          backgroundColor: 'rgba(0, 0, 0, 0.45)',
+          padding: 4,
         }}
       >
         {APP_LIST.map((app) => (
