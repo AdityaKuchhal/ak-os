@@ -9,6 +9,7 @@ import Resume from '@/components/apps/Resume/Resume';
 import Projects from '@/components/apps/Projects/Projects';
 import Experience from '@/components/apps/Experience/Experience';
 import TechStack from '@/components/apps/TechStack/TechStack';
+import Terminal from '@/components/apps/Terminal/Terminal';
 
 interface DesktopIconGridProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -47,6 +48,9 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
     } else if (label === 'Skills') {
       title = 'TECH_STACK.CFG';
       node = <TechStack />;
+    } else if (label === 'Terminal') {
+      title = 'TERMINAL_V1.0.EXE';
+      node = <Terminal openWindow={openWindow} />;
     }
 
     openWindow(title, node);
