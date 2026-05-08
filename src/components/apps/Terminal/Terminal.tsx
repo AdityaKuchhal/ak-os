@@ -7,6 +7,7 @@ import Resume from '@/components/apps/Resume/Resume';
 import Projects from '@/components/apps/Projects/Projects';
 import Experience from '@/components/apps/Experience/Experience';
 import TechStack from '@/components/apps/TechStack/TechStack';
+import Contact from '@/components/apps/Contact/Contact';
 import { skillCategories } from '@/data/skills';
 import { OWNER, OS_NAME, OS_VERSION } from '@/lib/constants/os';
 
@@ -203,6 +204,10 @@ export default function Terminal({ openWindow }: TerminalProps) {
           case 'skills':
             openWindow('TECH_STACK.CFG', <TechStack />);
             output = ['Opening TECH_STACK.CFG...'];
+            break;
+          case 'contact':
+            openWindow('CONTACT.EXE', <Contact />);
+            output = ['Opening CONTACT.EXE...'];
             break;
           default:
             output = [`open: command not found: ${arg}`];

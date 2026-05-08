@@ -14,6 +14,7 @@ import Timeline from '@/components/apps/Timeline/Timeline';
 import Achievements from '@/components/apps/Achievements/Achievements';
 import FileManager from '@/components/apps/FileManager/FileManager';
 import Playground from '@/components/apps/Playground/Playground';
+import DisplaySettings from '@/components/apps/DisplaySettings/DisplaySettings';
 
 interface StartMenuProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -85,6 +86,9 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
     } else if (label === 'Code') {
       title = 'CODE_PLAYGROUND.JS';
       node = <Playground />;
+    } else if (label === 'Display') {
+      title = 'DISPLAY_SETTINGS.CFG';
+      node = <DisplaySettings />;
     }
 
     openWindow(title, node);
