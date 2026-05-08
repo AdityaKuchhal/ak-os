@@ -11,6 +11,8 @@ import Experience from '@/components/apps/Experience/Experience';
 import TechStack from '@/components/apps/TechStack/TechStack';
 import Terminal from '@/components/apps/Terminal/Terminal';
 import SkillsRadar from '@/components/apps/Skills/SkillsRadar';
+import Timeline from '@/components/apps/Timeline/Timeline';
+import Achievements from '@/components/apps/Achievements/Achievements';
 
 interface DesktopIconGridProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -55,6 +57,12 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
     } else if (label === 'Radar') {
       title = 'SKILLS_RADAR.EXE';
       node = <SkillsRadar />;
+    } else if (label === 'Timeline') {
+      title = 'TIMELINE.EXE';
+      node = <Timeline />;
+    } else if (label === 'Awards') {
+      title = 'ACHIEVEMENTS.EXE';
+      node = <Achievements />;
     }
 
     openWindow(title, node);
