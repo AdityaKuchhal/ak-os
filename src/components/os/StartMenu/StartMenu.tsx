@@ -15,6 +15,8 @@ import Achievements from '@/components/apps/Achievements/Achievements';
 import FileManager from '@/components/apps/FileManager/FileManager';
 import Playground from '@/components/apps/Playground/Playground';
 import DisplaySettings from '@/components/apps/DisplaySettings/DisplaySettings';
+import Snake from '@/components/apps/Snake/Snake';
+import Tetris from '@/components/apps/Tetris/Tetris';
 
 interface StartMenuProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -89,6 +91,12 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
     } else if (label === 'Display') {
       title = 'DISPLAY_SETTINGS.CFG';
       node = <DisplaySettings />;
+    } else if (label === 'Snake') {
+      title = 'SNAKE.EXE';
+      node = <Snake />;
+    } else if (label === 'Tetris') {
+      title = 'TETRIS.EXE';
+      node = <Tetris />;
     }
 
     openWindow(title, node);
