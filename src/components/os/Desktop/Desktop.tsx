@@ -15,6 +15,7 @@ import Window from '@/components/shared/Window/Window';
 import Taskbar from '@/components/os/Taskbar/Taskbar';
 import DesktopIconGrid from '@/components/os/Desktop/DesktopIconGrid';
 import StatusBadges from '@/components/os/Desktop/StatusBadges';
+import Clippy from '@/components/shared/Clippy/Clippy';
 import { WALLPAPER_STORAGE_KEY } from '@/lib/constants/theme';
 
 function launchWallpaper(
@@ -88,6 +89,7 @@ export default function Desktop() {
       `}</style>
 
       <StatusBadges />
+      <Clippy />
 
       <div
         style={{
