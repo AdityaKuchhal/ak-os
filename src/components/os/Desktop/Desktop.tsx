@@ -2,11 +2,38 @@
 
 import { useEffect, useRef } from 'react';
 import { startBinaryWallpaper } from '@/lib/wallpapers/binary';
+import { startMatrixRainWallpaper } from '@/lib/wallpapers/matrix-rain';
+import { startStarfieldWallpaper } from '@/lib/wallpapers/starfield';
+import { startRetroGridWallpaper } from '@/lib/wallpapers/retro-grid';
+import { startPixelCloudsWallpaper } from '@/lib/wallpapers/pixel-clouds';
+import { startCyberRainWallpaper } from '@/lib/wallpapers/cyber-rain';
+import { startGeometryWallpaper } from '@/lib/wallpapers/geometry';
+import { startSolidColorWallpaper } from '@/lib/wallpapers/solid-color';
+import { startNoneWallpaper } from '@/lib/wallpapers/none';
 import { useWindowManager } from '@/lib/hooks/useWindowManager';
 import Window from '@/components/shared/Window/Window';
 import Taskbar from '@/components/os/Taskbar/Taskbar';
 import DesktopIconGrid from '@/components/os/Desktop/DesktopIconGrid';
 import StatusBadges from '@/components/os/Desktop/StatusBadges';
+import { WALLPAPER_STORAGE_KEY } from '@/lib/constants/theme';
+
+function launchWallpaper(
+  name: string,
+  canvas: HTMLCanvasElement,
+  color: string
+): () => void {
+  switch (name) {
+    case 'matrix-rain':  return startMatrixRainWallpaper(canvas, color);
+    case 'starfield':    return startStarfieldWallpaper(canvas, color);
+    case 'retro-grid':   return startRetroGridWallpaper(canvas, color);
+    case 'pixel-clouds': return startPixelCloudsWallpaper(canvas, color);
+    case 'cyber-rain':   return startCyberRainWallpaper(canvas, color);
+    case 'geometry':     return startGeometryWallpaper(canvas, color);
+    case 'solid-color':  return startSolidColorWallpaper(canvas, color);
+    case 'none':         return startNoneWallpaper(canvas, color);
+    default:             return startBinaryWallpaper(canvas, color);
+  }
+}
 
 export default function Desktop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -20,11 +47,35 @@ export default function Desktop() {
   } = useWindowManager();
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-    const color = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-primary')
-      .trim();
-    return startBinaryWallpaper(canvasRef.current, color);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const getColor = () =>
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-primary')
+        .trim();
+
+    const savedWallpaper =
+      localStorage.getItem(WALLPAPER_STORAGE_KEY) ?? 'binary';
+    let cleanup = launchWallpaper(savedWallpaper, canvas, getColor());
+
+    const handleWallpaperChange = (e: Event) => {
+      const wallpaper = (
+        e as CustomEvent<{ wallpaper: string }>
+      ).detail.wallpaper;
+      cleanup();
+      cleanup = launchWallpaper(wallpaper, canvas, getColor());
+    };
+
+    window.addEventListener('ak-os-wallpaper-change', handleWallpaperChange);
+
+    return () => {
+      cleanup();
+      window.removeEventListener(
+        'ak-os-wallpaper-change',
+        handleWallpaperChange
+      );
+    };
   }, []);
 
   return (
@@ -46,7 +97,7 @@ export default function Desktop() {
           overflow: 'hidden',
         }}
       >
-        {/* z-0: Binary wallpaper canvas */}
+        {/* z-0: Wallpaper canvas */}
         <canvas
           ref={canvasRef}
           style={{
@@ -84,7 +135,14 @@ export default function Desktop() {
         />
 
         {/* z-40: Window layer */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 40, pointerEvents: 'none' }}>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 40,
+            pointerEvents: 'none',
+          }}
+        >
           {windows
             .filter((w) => !w.isMinimized)
             .map((w) => (
