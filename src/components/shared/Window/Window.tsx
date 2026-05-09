@@ -17,6 +17,38 @@ interface DragState {
   startY: number;
 }
 
+interface WindowColors {
+  body: string;
+  titleBar: string;
+}
+
+function getWindowBg(): WindowColors {
+  const theme = document.documentElement.getAttribute('data-theme');
+  switch (theme) {
+    case 'amber':    return { body: '#140e00', titleBar: '#1f1500' };
+    case 'phosphor': return { body: '#0a140a', titleBar: '#0f1f0f' };
+    case 'white':    return { body: '#111111', titleBar: '#1a1a1a' };
+    default:         return { body: '#0a140a', titleBar: '#0f1f0f' };
+  }
+}
+
+const BTN_STYLE: React.CSSProperties = {
+  fontFamily: 'var(--font-terminal)',
+  fontSize: '11px',
+  color: 'var(--color-primary)',
+  background: 'transparent',
+  border: '1px solid var(--color-primary)',
+  width: '20px',
+  height: '18px',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 0,
+  lineHeight: 1,
+  borderRadius: 0,
+};
+
 export default function Window({
   win,
   onClose,
@@ -25,6 +57,11 @@ export default function Window({
   onFocus,
 }: WindowProps) {
   const [pos, setPos] = useState({ x: win.x, y: win.y });
+  const [colors, setColors] = useState<WindowColors>(() =>
+    typeof document === 'undefined'
+      ? { body: '#0a140a', titleBar: '#0f1f0f' }
+      : getWindowBg()
+  );
   const dragRef = useRef<DragState>({ dragging: false, startX: 0, startY: 0 });
 
   useEffect(() => {
@@ -46,7 +83,16 @@ export default function Window({
     };
   }, []);
 
-  const handleTitleMouseDown = (e: React.MouseEvent) => {
+  useEffect(() => {
+    const observer = new MutationObserver(() => setColors(getWindowBg()));
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const handleTitleBarMouseDown = (e: React.MouseEvent) => {
     if (win.isMaximized) return;
     e.preventDefault();
     dragRef.current = {
@@ -57,113 +103,89 @@ export default function Window({
     onFocus(win.id);
   };
 
+  const handleFocus = () => onFocus(win.id);
+
+  const sharedStyle: React.CSSProperties = {
+    border: '2px solid var(--color-primary)',
+    background: colors.body,
+    zIndex: win.zIndex,
+    display: win.isMinimized ? 'none' : 'flex',
+    flexDirection: 'column',
+    pointerEvents: 'auto',
+  };
+
   const containerStyle: React.CSSProperties = win.isMaximized
-    ? {
-        position: 'fixed',
-        inset: 0,
-        zIndex: win.zIndex,
-        display: 'flex',
-        flexDirection: 'column',
-        pointerEvents: 'auto',
-      }
-    : {
-        position: 'absolute',
-        left: pos.x,
-        top: pos.y,
-        width: win.width,
-        height: win.height,
-        zIndex: win.zIndex,
-        display: 'flex',
-        flexDirection: 'column',
-        pointerEvents: 'auto',
-      };
+    ? { ...sharedStyle, position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }
+    : { ...sharedStyle, position: 'absolute', left: pos.x, top: pos.y, width: win.width, height: win.height };
 
   return (
-    <div
-      style={containerStyle}
-      onMouseDown={() => onFocus(win.id)}
-    >
+    <div style={containerStyle} onMouseDown={handleFocus}>
       {/* Title bar */}
       <div
-        onMouseDown={handleTitleMouseDown}
+        onMouseDown={handleTitleBarMouseDown}
         style={{
-          height: 32,
-          flexShrink: 0,
+          height: '28px',
+          minHeight: '28px',
+          background: colors.titleBar,
+          borderBottom: '1px solid var(--color-primary)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingLeft: 8,
-          paddingRight: 4,
-          backgroundColor: 'var(--color-surface)',
-          borderBottom: '1px solid var(--color-border)',
-          border: '1px solid var(--color-border)',
-          fontFamily: 'var(--font-terminal)',
-          fontSize: '1rem',
-          color: 'var(--color-text)',
-          cursor: win.isMaximized ? 'default' : 'move',
+          cursor: win.isMaximized ? 'default' : 'grab',
           userSelect: 'none',
         }}
       >
-        <span>{win.title}</span>
-        <div style={{ display: 'flex', gap: 2 }}>
-          {/* Minimize */}
+        <span
+          style={{
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '13px',
+            color: 'var(--color-primary)',
+            paddingLeft: '8px',
+            textTransform: 'uppercase',
+          }}
+        >
+          {win.title}
+        </span>
+        <div style={{ display: 'flex', gap: '2px', paddingRight: '6px' }}>
           <button
             onClick={(e) => { e.stopPropagation(); onMinimize(win.id); }}
-            style={btnStyle('var(--color-text-dim)')}
+            onMouseDown={(e) => e.stopPropagation()}
+            style={BTN_STYLE}
             aria-label="Minimize"
           >
-            [_]
+            _
           </button>
-          {/* Maximize */}
           <button
             onClick={(e) => { e.stopPropagation(); onMaximize(win.id); }}
-            style={btnStyle('var(--color-text-dim)')}
+            onMouseDown={(e) => e.stopPropagation()}
+            style={BTN_STYLE}
             aria-label={win.isMaximized ? 'Restore' : 'Maximize'}
           >
-            [□]
+            □
           </button>
-          {/* Close */}
           <button
             onClick={(e) => { e.stopPropagation(); onClose(win.id); }}
-            style={btnStyle('#ff4444')}
+            onMouseDown={(e) => e.stopPropagation()}
+            style={BTN_STYLE}
             aria-label="Close"
           >
-            [X]
+            ✕
           </button>
         </div>
       </div>
 
-      {/* Content body */}
+      {/* Window body */}
       <div
         style={{
           flex: 1,
           overflow: 'auto',
-          backgroundColor: 'var(--color-bg)',
-          padding: 8,
-          border: '1px solid var(--color-border)',
-          borderTop: 'none',
+          background: colors.body,
+          padding: '8px',
         }}
+        onClick={handleFocus}
       >
         {win.component}
       </div>
     </div>
   );
-}
-
-function btnStyle(color: string): React.CSSProperties {
-  return {
-    width: 32,
-    height: 20,
-    backgroundColor: 'transparent',
-    border: 'none',
-    borderRadius: 0,
-    color,
-    fontFamily: 'var(--font-terminal)',
-    fontSize: '0.85rem',
-    cursor: 'pointer',
-    padding: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
 }
