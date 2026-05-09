@@ -13,6 +13,8 @@ import Terminal from '@/components/apps/Terminal/Terminal';
 import SkillsRadar from '@/components/apps/Skills/SkillsRadar';
 import Timeline from '@/components/apps/Timeline/Timeline';
 import Achievements from '@/components/apps/Achievements/Achievements';
+import FileManager from '@/components/apps/FileManager/FileManager';
+import Playground from '@/components/apps/Playground/Playground';
 
 interface DesktopIconGridProps {
   openWindow: (title: string, component: ReactNode) => void;
@@ -63,6 +65,12 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
     } else if (label === 'Awards') {
       title = 'ACHIEVEMENTS.EXE';
       node = <Achievements />;
+    } else if (label === 'Files') {
+      title = 'FILE_MANAGER.EXE';
+      node = <FileManager openWindow={openWindow} />;
+    } else if (label === 'Code') {
+      title = 'CODE_PLAYGROUND.JS';
+      node = <Playground />;
     }
 
     openWindow(title, node);
