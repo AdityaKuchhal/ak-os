@@ -8,6 +8,7 @@ import Projects from '@/components/apps/Projects/Projects';
 import Experience from '@/components/apps/Experience/Experience';
 import TechStack from '@/components/apps/TechStack/TechStack';
 import Contact from '@/components/apps/Contact/Contact';
+import Certifications from '@/components/apps/Certifications/Certifications';
 import { skillCategories } from '@/data/skills';
 import { OWNER, OS_NAME, OS_VERSION } from '@/lib/constants/os';
 
@@ -208,6 +209,10 @@ export default function Terminal({ openWindow }: TerminalProps) {
           case 'contact':
             openWindow('CONTACT.EXE', <Contact />);
             output = ['Opening CONTACT.EXE...'];
+            break;
+          case 'certs':
+            openWindow('CERTS.LOG', <Certifications />);
+            output = ['Opening CERTS.LOG...'];
             break;
           default:
             output = [`open: command not found: ${arg}`];
