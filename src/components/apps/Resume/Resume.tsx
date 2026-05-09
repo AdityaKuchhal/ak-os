@@ -232,9 +232,10 @@ export default function Resume() {
       {/* Download button */}
       <div style={{ marginTop: 24 }}>
         <a
-          href="/resume.pdf"
+          href="/aditya_kuchhal.pdf"
           target="_blank"
           rel="noopener noreferrer"
+          download
           style={{
             display: 'inline-block',
             backgroundColor: 'var(--color-primary)',
@@ -246,7 +247,7 @@ export default function Resume() {
             textDecoration: 'none',
           }}
         >
-          [ DOWNLOAD PDF ]
+          [ DOWNLOAD RESUME ]
         </a>
       </div>
     </div>
