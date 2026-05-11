@@ -57,22 +57,34 @@ export default function Clippy() {
           zIndex: 9998,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
           animation: 'clippySlideIn 300ms ease-out forwards',
+          border: '2px solid var(--color-primary)',
+          background: '#0a140a',
+          width: 240,
         }}
       >
-        {/* Speech bubble */}
+        {/* Title bar */}
         <div
           style={{
-            backgroundColor: 'var(--color-surface)',
-            border: '2px solid var(--color-primary)',
+            background: '#0f1f0f',
+            borderBottom: '1px solid var(--color-primary)',
+            padding: '4px 8px',
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '0.85rem',
+            color: 'var(--color-primary)',
+          }}
+        >
+          📎 CLIPPY
+        </div>
+
+        {/* Content */}
+        <div
+          style={{
             padding: 12,
-            maxWidth: 220,
             fontFamily: 'var(--font-terminal)',
             fontSize: '0.85rem',
             color: 'var(--color-text)',
             lineHeight: 1.5,
-            borderRadius: 0,
           }}
         >
           <div style={{ marginBottom: 10 }}>{MESSAGES[messageIndex]}</div>
@@ -93,19 +105,6 @@ export default function Clippy() {
               Go Away
             </button>
           </div>
-        </div>
-
-        {/* Clippy label */}
-        <div
-          style={{
-            color: 'var(--color-primary)',
-            fontFamily: 'var(--font-terminal)',
-            fontSize: '0.85rem',
-            marginTop: 6,
-            textAlign: 'center',
-          }}
-        >
-          📎 CLIPPY
         </div>
       </div>
     </>

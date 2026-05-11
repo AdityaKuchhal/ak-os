@@ -1,11 +1,10 @@
 'use client';
 
 import { useRef } from 'react';
-import type { AppEntry } from '@/lib/constants/apps';
-import { ASCII_ICONS } from '@/lib/constants/apps';
+import type { App } from '@/types';
 
 interface DesktopIconProps {
-  app: AppEntry;
+  app: App;
   isSelected: boolean;
   onSelect: () => void;
   onOpen: () => void;
@@ -22,53 +21,61 @@ export default function DesktopIcon({
   const handleClick = () => {
     const now = Date.now();
     if (now - lastClickRef.current < 300) {
-      lastClickRef.current = 0;
       onOpen();
     } else {
-      lastClickRef.current = now;
       onSelect();
     }
+    lastClickRef.current = now;
   };
+
+  const isTextIcon = app.icon === '>_' || app.icon === '{}';
 
   return (
     <div
       onClick={handleClick}
       style={{
-        width: 72,
-        height: 72,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 4,
-        cursor: 'default',
-        flexShrink: 0,
-        backgroundColor: isSelected ? 'var(--color-glow)' : 'transparent',
+        width: '72px',
+        padding: '6px 4px',
+        cursor: 'pointer',
+        background: isSelected
+          ? 'rgba(0, 255, 65, 0.15)'
+          : 'rgba(0, 0, 0, 0.4)',
         border: isSelected
-          ? '1px solid var(--color-border)'
+          ? '1px solid var(--color-primary)'
           : '1px solid transparent',
+        userSelect: 'none',
+        gap: '4px',
       }}
     >
-      <span
+      <div
         style={{
-          fontFamily: 'var(--font-terminal)',
-          fontSize: '1.1rem',
+          width: '40px',
+          height: '40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: isTextIcon ? '18px' : '32px',
           color: 'var(--color-primary)',
+          fontFamily: isTextIcon ? 'var(--font-terminal)' : 'inherit',
+          fontWeight: isTextIcon ? 'bold' : 'normal',
           lineHeight: 1,
         }}
       >
-        {ASCII_ICONS[app.label] ?? '[?]'}
-      </span>
+        {app.icon}
+      </div>
       <span
         style={{
           fontFamily: 'var(--font-terminal)',
-          fontSize: '0.7rem',
-          color: 'var(--color-text)',
+          fontSize: '11px',
+          color: isSelected ? 'var(--color-primary)' : 'var(--color-text)',
           textAlign: 'center',
           lineHeight: 1.2,
           wordBreak: 'break-word',
-          maxWidth: 68,
-          textShadow: '0 1px 3px rgba(0,0,0,0.9)',
+          maxWidth: '68px',
         }}
       >
         {app.label}

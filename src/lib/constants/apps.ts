@@ -1,39 +1,18 @@
-export interface AppEntry {
-  id: string;
-  label: string;
-  component: string;
-}
+export const APP_LIST = [
+  { id: 'terminal', label: 'Terminal', icon: '>_',  windowTitle: 'TERMINAL_V1.0.EXE'     },
+  { id: 'files',    label: 'Files',    icon: '📁',  windowTitle: 'FILE_MANAGER.EXE'       },
+  { id: 'projects', label: 'Projects', icon: '🗂️', windowTitle: 'PROJECTS.EXE'           },
+  { id: 'logs',     label: 'Logs',     icon: '📋',  windowTitle: 'SYSTEM_LOGS.TXT'        },
+  { id: 'about',    label: 'About',    icon: '👤',  windowTitle: 'ABOUT_ME.INFO'          },
+  { id: 'skills',   label: 'Skills',   icon: '⚙️', windowTitle: 'TECH_STACK.CFG'         },
+  { id: 'radar',    label: 'Radar',    icon: '📊',  windowTitle: 'SKILLS_RADAR.EXE'       },
+  { id: 'awards',   label: 'Awards',   icon: '🏆',  windowTitle: 'ACHIEVEMENTS.EXE'       },
+  { id: 'resume',   label: 'Resume',   icon: '📄',  windowTitle: 'RESUME.EXE'             },
+  { id: 'code',     label: 'Code',     icon: '💻',  windowTitle: 'CODE_PLAYGROUND.JS'     },
+  { id: 'display',  label: 'Display',  icon: '🖥️', windowTitle: 'DISPLAY_SETTINGS.CFG'   },
+  { id: 'tetris',   label: 'Tetris',   icon: '🧱',  windowTitle: 'TETRIS.EXE'             },
+  { id: 'snake',    label: 'Snake',    icon: '🐍',  windowTitle: 'SNAKE.EXE'              },
+  { id: 'timeline', label: 'Timeline', icon: '📅',  windowTitle: 'TIMELINE.EXE'           },
+] as const;
 
-export const ASCII_ICONS: Record<string, string> = {
-  Terminal: '>_',
-  Files: '[F]',
-  Projects: '[P]',
-  Logs: '[L]',
-  About: '[A]',
-  Skills: '[S]',
-  Radar: '[R]',
-  Awards: '[W]',
-  Resume: '[D]',
-  Code: '{ }',
-  Display: '[M]',
-  Tetris: '[T]',
-  Snake: '[~]',
-  Timeline: '[>]',
-};
-
-export const APP_LIST: AppEntry[] = [
-  { id: 'terminal', label: 'Terminal', component: 'Terminal' },
-  { id: 'files', label: 'Files', component: 'FileManager' },
-  { id: 'projects', label: 'Projects', component: 'Projects' },
-  { id: 'logs', label: 'Logs', component: 'Experience' },
-  { id: 'about', label: 'About', component: 'About' },
-  { id: 'skills', label: 'Skills', component: 'Skills' },
-  { id: 'radar', label: 'Radar', component: 'TechStack' },
-  { id: 'awards', label: 'Awards', component: 'Achievements' },
-  { id: 'resume', label: 'Resume', component: 'Resume' },
-  { id: 'code', label: 'Code', component: 'Playground' },
-  { id: 'display', label: 'Display', component: 'DisplaySettings' },
-  { id: 'tetris', label: 'Tetris', component: 'Tetris' },
-  { id: 'snake', label: 'Snake', component: 'Snake' },
-  { id: 'timeline', label: 'Timeline', component: 'Timeline' },
-];
+export type AppId = typeof APP_LIST[number]['id'];

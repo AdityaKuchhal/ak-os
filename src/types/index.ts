@@ -1,7 +1,13 @@
 import type { Theme } from '@/lib/constants/theme';
-import type { AppEntry } from '@/lib/constants/apps';
 
-export type { Theme, AppEntry };
+export type { Theme };
+
+export interface App {
+  id: string;
+  label: string;
+  icon: string;
+  windowTitle: string;
+}
 
 export interface Project {
   id: number;

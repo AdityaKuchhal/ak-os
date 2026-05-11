@@ -62,3 +62,65 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+
+* {
+  font-family: var(--font-terminal), 'Courier New', monospace;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-terminal), 'Courier New', monospace;
+}
+
+input,
+textarea {
+  font-family: var(--font-terminal), 'Courier New', monospace;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.06) 3px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 99999;
+  animation: scanlines 10s linear infinite;
+}
+
+@keyframes scanlines {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100%; }
+}
