@@ -43,7 +43,7 @@ export default function DesktopIcon({
         cursor: 'pointer',
         background: isSelected
           ? 'rgba(0, 255, 65, 0.15)'
-          : 'rgba(0, 0, 0, 0.4)',
+          : 'transparent',
         border: isSelected
           ? '1px solid var(--color-primary)'
           : '1px solid transparent',
