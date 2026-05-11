@@ -88,23 +88,23 @@ export default function Clippy() {
           }}
         >
           <div style={{ marginBottom: 10 }}>{MESSAGES[messageIndex]}</div>
-          <div style={{ textAlign: 'right' }}>
-            <button
-              onClick={handleDismiss}
-              style={{
-                background: 'transparent',
-                border: '1px solid var(--color-border)',
-                color: 'var(--color-text-dim)',
-                fontFamily: 'var(--font-terminal)',
-                fontSize: '0.85rem',
-                padding: '2px 8px',
-                borderRadius: 0,
-                cursor: 'pointer',
-              }}
-            >
-              Go Away
-            </button>
-          </div>
+          <button
+            onClick={handleDismiss}
+            style={{
+              fontFamily: 'var(--font-terminal)',
+              fontSize: '11px',
+              color: 'var(--color-text-dim)',
+              background: 'transparent',
+              border: '1px solid var(--color-border)',
+              padding: '2px 8px',
+              cursor: 'pointer',
+              display: 'block',
+              marginLeft: 'auto',
+              marginTop: '8px',
+            }}
+          >
+            Go Away
+          </button>
         </div>
       </div>
     </>

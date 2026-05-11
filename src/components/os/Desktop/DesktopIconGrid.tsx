@@ -90,25 +90,21 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
 
   return (
     <>
-      <style>{`
-        .ak-icon-grid::-webkit-scrollbar { display: none; }
-      `}</style>
       <div
-        className="ak-icon-grid"
         style={{
           position: 'absolute',
-          left: 8,
-          top: 8,
-          bottom: 48,
+          left: '8px',
+          top: '8px',
+          bottom: '48px',
           zIndex: 20,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 4,
-          width: 84,
+          display: 'grid',
+          gridTemplateColumns: '72px 72px',
+          gridAutoRows: 'min-content',
+          gap: '4px',
           overflowY: 'auto',
-          scrollbarWidth: 'none',
-          backgroundColor: 'rgba(0, 0, 0, 0.45)',
-          padding: 4,
+          overflowX: 'hidden',
+          width: '152px',
+          alignContent: 'start',
         }}
       >
         {APP_LIST.map((app) => (
