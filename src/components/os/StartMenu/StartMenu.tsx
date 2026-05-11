@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { APP_LIST, ASCII_ICONS } from '@/lib/constants/apps';
+import { APP_LIST } from '@/lib/constants/apps';
 import About from '@/components/apps/About/About';
 import Resume from '@/components/apps/Resume/Resume';
 import Projects from '@/components/apps/Projects/Projects';
@@ -146,17 +146,10 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
               'transparent';
           }}
         >
-          <span
-            style={{
-              width: 32,
-              color: 'var(--color-primary)',
-              flexShrink: 0,
-              fontFamily: 'var(--font-terminal)',
-            }}
-          >
-            {ASCII_ICONS[app.label] ?? '[?]'}
-          </span>
-          {app.label}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '16px' }}>{app.icon}</span>
+            <span>{app.label}</span>
+          </div>
         </button>
       ))}
     </div>

@@ -52,8 +52,8 @@ export default function Taskbar({
         right: 0,
         height: 40,
         zIndex: 30,
-        backgroundColor: 'var(--color-surface)',
-        borderTop: '1px solid var(--color-border)',
+        backgroundColor: '#0a140a',
+        borderTop: '1px solid var(--color-primary)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -74,7 +74,8 @@ export default function Taskbar({
             border: '1px solid var(--color-primary)',
           }}
         >
-          [ START ]
+          <span style={{ fontSize: '0.75em', marginRight: 2 }}>≡</span>
+          {' START'}
         </button>
         {menuOpen && (
           <StartMenu
