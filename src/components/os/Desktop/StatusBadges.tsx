@@ -17,16 +17,14 @@ export default function StatusBadges() {
     <div
       style={{
         position: 'fixed',
-        top: 12,
-        left: 96,
-        zIndex: 9999,
+        top: '8px',
+        right: '12px',
         display: 'flex',
-        gap: 8,
+        flexDirection: 'row',
+        gap: '8px',
+        zIndex: 50,
       }}
     >
-      <span style={{ ...badgeBase, backgroundColor: '#00aa44' }}>
-        ● Available for opportunities
-      </span>
       <a
         href={`https://${OWNER.linkedin}`}
         target="_blank"
@@ -34,6 +32,14 @@ export default function StatusBadges() {
         style={{ ...badgeBase, backgroundColor: '#0077b5' }}
       >
         in LinkedIn
+      </a>
+      <a
+        href="https://github.com/AdityaKuchhal"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ ...badgeBase, backgroundColor: '#333333' }}
+      >
+        gh GitHub
       </a>
     </div>
   );
