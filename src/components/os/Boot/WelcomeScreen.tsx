@@ -37,35 +37,57 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
       <div
         style={{
           border: '2px solid var(--color-primary)',
-          padding: '48px 40px',
-          width: '420px',
+          padding: '56px 48px',
+          width: '380px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <h1
-          style={{
-            fontFamily: 'var(--font-terminal)',
-            fontSize: '52px',
-            fontWeight: 'bold',
-            color: 'transparent',
-            WebkitTextStroke: '1.5px var(--color-primary)',
-            letterSpacing: '8px',
-            margin: '0 0 8px 0',
-            textAlign: 'center',
-          }}
+        <svg
+          viewBox="0 0 340 70"
+          width="340"
+          height="70"
+          style={{ marginBottom: '8px', overflow: 'visible' }}
         >
-          ADITYA
-        </h1>
+          <text
+            x="50%"
+            y="58"
+            textAnchor="middle"
+            fill="none"
+            stroke="var(--color-primary)"
+            strokeWidth="1"
+            style={{
+              fontFamily: 'var(--font-terminal)',
+              fontSize: '62px',
+              fontWeight: 'bold',
+              letterSpacing: '10px',
+            }}
+          >
+            ADITYA
+          </text>
+        </svg>
 
         <p
           style={{
             fontFamily: 'var(--font-terminal)',
-            fontSize: '11px',
+            fontSize: '12px',
+            color: 'var(--color-primary)',
+            letterSpacing: '1px',
+            margin: '0 0 6px 0',
+            textAlign: 'center',
+          }}
+        >
+          Welcome to AK-OS v1.0
+        </p>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '10px',
             color: 'var(--color-text-dim)',
             letterSpacing: '2px',
-            margin: '0 0 32px 0',
+            margin: '0 0 40px 0',
             textAlign: 'center',
           }}
         >

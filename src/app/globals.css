@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 [data-theme="matrix"] {
-  --color-primary: #00ff41;
+  --color-primary: #85e085;
   --color-secondary: #008f11;
   --color-bg: #0d0d0d;
   --color-surface: #0a0a0a;
-  --color-border: #00ff41;
+  --color-border: #85e085;
   --color-glow: rgba(0, 255, 65, 0.4);
-  --color-text: #00ff41;
+  --color-text: #85e085;
   --color-text-dim: #008f11;
 }
 
