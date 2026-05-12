@@ -1,29 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface WelcomeScreenProps {
   onEnter: () => void;
 }
 
-function formatTime(date: Date): string {
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-}
-
 export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
-  const [clock, setClock] = useState(() => formatTime(new Date()));
   const onEnterRef = useRef(onEnter);
   useEffect(() => {
     onEnterRef.current = onEnter;
   }, [onEnter]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setClock(formatTime(new Date()));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -34,129 +21,94 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
   }, []);
 
   return (
-    <>
-      <style>{`
-        @keyframes scanlines {
-          from { background-position: 0 0; }
-          to   { background-position: 0 100%; }
-        }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0; }
-        }
-      `}</style>
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100vw',
+        height: '100vh',
+        background: '#000',
+        zIndex: 40,
+      }}
+    >
       <div
-        onClick={onEnter}
         style={{
-          position: 'fixed',
-          inset: 0,
+          border: '2px solid var(--color-primary)',
+          padding: '48px 40px',
+          width: '420px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
-          gap: '2rem',
-          backgroundColor: 'var(--color-bg)',
-          color: 'var(--color-text)',
-          fontFamily: 'var(--font-terminal)',
-          cursor: 'default',
-          userSelect: 'none',
-          zIndex: 40,
         }}
       >
-        {/* Top — title */}
-        <div style={{ textAlign: 'center' }}>
-          <div
-            style={{
-              fontSize: '3rem',
-              color: 'var(--color-primary)',
-              lineHeight: 1.1,
-            }}
-          >
-            AK-OS v1.0
-          </div>
-          <div
-            style={{
-              fontSize: '0.9rem',
-              color: 'var(--color-text-dim)',
-              letterSpacing: '0.15em',
-              marginTop: '0.25rem',
-            }}
-          >
-            SOFTWARE DEVELOPER PORTFOLIO
-          </div>
-        </div>
-
-        {/* Middle — avatar, greeting, clock */}
-        <div
+        <h1
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '52px',
+            fontWeight: 'bold',
+            color: 'transparent',
+            WebkitTextStroke: '1.5px var(--color-primary)',
+            letterSpacing: '8px',
+            margin: '0 0 8px 0',
+            textAlign: 'center',
           }}
         >
-          <div
-            style={{
-              width: 80,
-              height: 80,
-              border: '2px solid var(--color-border)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.8rem',
-              color: 'var(--color-primary)',
-            }}
-          >
-            AK
-          </div>
-          <div style={{ fontSize: '1.4rem', color: 'var(--color-text)' }}>
-            Welcome, Aditya Kuchhal
-          </div>
-          <div
-            style={{
-              fontSize: '1.6rem',
-              color: 'var(--color-primary)',
-              fontVariantNumeric: 'tabular-nums',
-              letterSpacing: '0.05em',
-            }}
-          >
-            {clock}
-          </div>
-        </div>
+          ADITYA
+        </h1>
 
-        {/* Bottom — enter prompt */}
-        <div
+        <p
           style={{
-            fontSize: '1.1rem',
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '11px',
+            color: 'var(--color-text-dim)',
+            letterSpacing: '2px',
+            margin: '0 0 32px 0',
+            textAlign: 'center',
+          }}
+        >
+          SOFTWARE DEVELOPER · AI/ML · OPEN TO OPPORTUNITIES
+        </p>
+
+        <button
+          onClick={onEnter}
+          style={{
+            width: '100%',
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '13px',
+            letterSpacing: '2px',
+            padding: '12px',
+            background: 'var(--color-primary)',
+            color: '#000',
+            border: '2px solid var(--color-primary)',
+            cursor: 'pointer',
+            marginBottom: '8px',
+            borderRadius: 0,
+          }}
+        >
+          ▶ START PORTFOLIO
+        </button>
+
+        <button
+          onClick={onEnter}
+          style={{
+            width: '100%',
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '13px',
+            letterSpacing: '2px',
+            padding: '12px',
+            background: 'transparent',
             color: 'var(--color-primary)',
-            display: 'flex',
-            alignItems: 'baseline',
-            gap: '2px',
+            border: '2px solid var(--color-primary)',
+            cursor: 'pointer',
+            borderRadius: 0,
           }}
         >
-          [ PRESS ENTER OR CLICK TO CONTINUE ]
-          <span
-            aria-hidden="true"
-            style={{ animation: 'blink 1s step-end infinite' }}
-          >
-            _
-          </span>
-        </div>
-
-        {/* CRT scan-line overlay */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background:
-              'repeating-linear-gradient(transparent 0px, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px)',
-            pointerEvents: 'none',
-            animation: 'scanlines 8s linear infinite',
-            zIndex: 50,
-          }}
-        />
+          ✉ CONTACT ADITYA
+        </button>
       </div>
-    </>
+    </div>
   );
 }
