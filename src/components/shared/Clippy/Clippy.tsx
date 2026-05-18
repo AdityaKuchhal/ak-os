@@ -57,10 +57,11 @@ export default function Clippy() {
           zIndex: 9998,
           display: 'flex',
           flexDirection: 'column',
-          animation: 'clippySlideIn 300ms ease-out forwards',
+          animation: 'bootUp 0.3s ease-out forwards',
           border: '2px solid var(--color-primary)',
           background: '#0a140a',
           width: 240,
+          boxShadow: 'rgba(0,0,0,0.5) 6px 6px 0px 0px',
         }}
       >
         {/* Title bar */}

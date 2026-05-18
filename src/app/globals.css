@@ -124,3 +124,9 @@ body::after {
   from { background-position: 0 0; }
   to   { background-position: 0 100%; }
 }
+
+@keyframes bootUp {
+  0%   { transform: scale(0.1) skew(20deg); opacity: 0; }
+  80%  { transform: scale(1.02) skew(-2deg); opacity: 1; }
+  100% { transform: scale(1) skew(0deg); opacity: 1; }
+}
