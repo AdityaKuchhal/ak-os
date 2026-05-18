@@ -32,15 +32,16 @@ export default function Taskbar({
   }, []);
 
   const btnBase: React.CSSProperties = {
-    backgroundColor: 'transparent',
-    border: '1px solid var(--color-border)',
-    color: 'var(--color-text)',
+    background: 'rgb(133, 224, 133)',
+    border: '1px solid rgb(5, 5, 5)',
+    color: 'rgb(5, 5, 5)',
     fontFamily: 'var(--font-terminal)',
     fontSize: '0.9rem',
     cursor: 'default',
     padding: '2px 8px',
     borderRadius: 0,
     whiteSpace: 'nowrap' as const,
+    boxShadow: 'rgba(255,255,255,0.2) 2px 2px 0px 0px inset, rgba(0,0,0,0.5) -2px -2px 0px 0px inset',
   };
 
   return (
@@ -50,10 +51,9 @@ export default function Taskbar({
         bottom: 0,
         left: 0,
         right: 0,
-        height: 40,
+        height: 44,
         zIndex: 30,
-        backgroundColor: '#0a140a',
-        borderTop: '1px solid var(--color-primary)',
+        background: 'rgb(133, 224, 133)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -69,9 +69,16 @@ export default function Taskbar({
             setMenuOpen((prev) => !prev);
           }}
           style={{
-            ...btnBase,
-            color: 'var(--color-primary)',
-            border: '1px solid var(--color-primary)',
+            background: 'rgb(5, 5, 5)',
+            color: 'rgb(133, 224, 133)',
+            border: '1px solid rgb(133, 224, 133)',
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '18px',
+            padding: '4px 12px',
+            cursor: 'pointer',
+            borderRadius: 0,
+            boxShadow: 'rgba(255,255,255,0.2) 2px 2px 0px 0px inset, rgba(0,0,0,0.5) -2px -2px 0px 0px inset',
+            whiteSpace: 'nowrap' as const,
           }}
         >
           <span style={{ fontSize: '0.75em', marginRight: 2 }}>≡</span>
@@ -119,7 +126,7 @@ export default function Taskbar({
       {/* Right: live clock */}
       <div
         style={{
-          color: 'var(--color-primary)',
+          color: 'rgb(5, 5, 5)',
           fontSize: '0.9rem',
           fontVariantNumeric: 'tabular-nums',
           letterSpacing: '0.05em',
