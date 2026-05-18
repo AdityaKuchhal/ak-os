@@ -145,6 +145,7 @@ export default function Window({
         }}
       >
         <span
+          className="glow-medium"
           style={{
             fontFamily: 'var(--font-terminal)',
             fontSize: '13px',

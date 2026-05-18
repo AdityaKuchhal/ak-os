@@ -68,6 +68,7 @@ export default function DesktopIcon({
         {app.icon}
       </div>
       <span
+        className="glow-medium"
         style={{
           fontFamily: 'var(--font-terminal)',
           fontSize: '11px',

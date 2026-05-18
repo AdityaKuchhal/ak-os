@@ -84,6 +84,7 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
         </p>
 
         <p
+          className="glow-medium"
           style={{
             fontFamily: 'var(--font-terminal)',
             fontSize: '10px',
@@ -98,6 +99,7 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
 
         <button
           onClick={onEnter}
+          className="glow-bright"
           style={{
             width: '100%',
             fontFamily: 'var(--font-terminal)',
@@ -117,6 +119,7 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
 
         <button
           onClick={onEnter}
+          className="glow-subtle"
           style={{
             width: '100%',
             fontFamily: 'var(--font-terminal)',

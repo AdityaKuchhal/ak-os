@@ -29,6 +29,7 @@ export default function StatusBadges() {
         href={`https://${OWNER.linkedin}`}
         target="_blank"
         rel="noopener noreferrer"
+        className="glow-subtle"
         style={{ ...badgeBase, backgroundColor: '#0077b5' }}
       >
         in LinkedIn
@@ -37,6 +38,7 @@ export default function StatusBadges() {
         href="https://github.com/AdityaKuchhal"
         target="_blank"
         rel="noopener noreferrer"
+        className="glow-subtle"
         style={{ ...badgeBase, backgroundColor: '#333333' }}
       >
         gh GitHub
