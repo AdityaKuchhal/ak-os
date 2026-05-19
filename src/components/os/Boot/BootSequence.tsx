@@ -1,112 +1,136 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { BOOT_STORAGE_KEY } from '@/lib/constants/theme';
-import { OS_VERSION } from '@/lib/constants/os';
+import { useEffect, useState } from 'react';
+import { OS_NAME, OS_VERSION } from '@/lib/constants/os';
+
+const BOOT_LINES = [
+  { text: `${OS_NAME} ${OS_VERSION} — BIOS Setup Utility`, bright: false },
+  { text: 'Copyright (c) 2026 Aditya Kuchhal', bright: false },
+  { text: '', bright: false },
+  { text: 'Detecting hardware configuration...', bright: false },
+  { text: 'CPU: Software Developer @ 3.6GHz', bright: false },
+  { text: 'RAM: 8192MB — Python · Java · TypeScript', bright: false },
+  { text: 'GPU: React 19 + Next.js 15 detected', bright: false },
+  { text: 'STORAGE: PostgreSQL · MongoDB · Redis', bright: false },
+  { text: 'NETWORK: AWS · Docker · GitHub Actions', bright: false },
+  { text: '', bright: false },
+  { text: 'Loading AK-OS Kernel..............', bright: false },
+  { text: 'Running POST diagnostics...', bright: false },
+  { text: '[ OK ] Caffeine levels: CRITICAL', bright: true },
+  { text: '[ OK ] Imposter syndrome: SUPPRESSED', bright: true },
+  { text: '[ OK ] Git commit history: SUSPICIOUSLY CLEAN', bright: true },
+  { text: '[ OK ] Open to opportunities: TRUE', bright: true },
+  { text: '', bright: false },
+  { text: `Loading ${OS_NAME} ${OS_VERSION}...`, bright: false },
+];
 
 interface BootSequenceProps {
   onComplete: () => void;
 }
 
-const BOOT_MESSAGES = [
-  `AK-OS ${OS_VERSION} — BIOS Setup Utility`,
-  'Copyright (c) 2026 Aditya Kuchhal',
-  '',
-  'Detecting hardware configuration...',
-  'CPU: Software Developer @ 3.6GHz',
-  'RAM: 8192MB — Python · Java · TypeScript',
-  'GPU: React 19 + Next.js 15 detected',
-  'STORAGE: PostgreSQL · MongoDB · Redis',
-  'NETWORK: AWS · Docker · GitHub Actions',
-  '',
-  'Running POST diagnostics...',
-  '[ OK ] ML pipeline initialized',
-  '[ OK ] REST API layer loaded',
-  '[ OK ] CI/CD pipeline connected',
-  '[ OK ] Test framework armed',
-  '',
-  `Loading AK-OS ${OS_VERSION}...`,
-  'Welcome, Aditya.',
-];
-
 export default function BootSequence({ onComplete }: BootSequenceProps) {
-  const [visibleCount, setVisibleCount] = useState(0);
-  const [fading, setFading] = useState(false);
-  const onCompleteRef = useRef(onComplete);
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [showBar, setShowBar] = useState(false);
+
   useEffect(() => {
-    onCompleteRef.current = onComplete;
+    const lineInterval = setInterval(() => {
+      setVisibleLines((prev) => {
+        if (prev >= BOOT_LINES.length) {
+          clearInterval(lineInterval);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 120);
+
+    const barTimeout = setTimeout(() => setShowBar(true), 200);
+
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(progressInterval);
+          return 100;
+        }
+        return prev + 2;
+      });
+    }, 40);
+
+    const completeTimeout = setTimeout(() => {
+      onComplete();
+    }, 2800);
+
+    return () => {
+      clearInterval(lineInterval);
+      clearInterval(progressInterval);
+      clearTimeout(barTimeout);
+      clearTimeout(completeTimeout);
+    };
   }, [onComplete]);
 
-  useEffect(() => {
-    if (localStorage.getItem(BOOT_STORAGE_KEY) === 'skip') {
-      onCompleteRef.current();
-      return;
-    }
-
-    const count = BOOT_MESSAGES.length;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-
-    BOOT_MESSAGES.forEach((_msg, i) => {
-      timers.push(setTimeout(() => setVisibleCount(i + 1), i * 80));
-    });
-
-    timers.push(setTimeout(() => setFading(true), count * 80 + 600));
-    timers.push(
-      setTimeout(() => onCompleteRef.current(), count * 80 + 600 + 400)
-    );
-
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
   return (
-    <>
-      <style>{`
-        @keyframes scanlines {
-          from { background-position: 0 0; }
-          to   { background-position: 0 100%; }
-        }
-        @media (max-width: 640px) {
-          .boot-text { font-size: 1rem !important; }
-        }
-      `}</style>
-      <div
-        className="boot-text"
-        role="status"
-        aria-live="polite"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'var(--color-bg)',
-          color: 'var(--color-primary)',
-          fontFamily: 'var(--font-terminal)',
-          fontSize: '1.1rem',
-          lineHeight: 1.6,
-          padding: '2rem',
-          overflow: 'hidden',
-          zIndex: 40,
-          opacity: fading ? 0 : 1,
-          transition: 'opacity 400ms ease',
-        }}
-      >
-        {(BOOT_MESSAGES.slice(0, visibleCount) as readonly string[]).map(
-          (line, i) => (
-            <div key={i}>{line || ' '}</div>
-          )
-        )}
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: '#000',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'var(--font-terminal)',
+        fontSize: '16px',
+        padding: '40px',
+      }}
+    >
+      <div style={{ width: '600px', maxWidth: '90vw' }}>
+        {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
+          <div
+            key={i}
+            style={{
+              color: line.bright
+                ? 'var(--color-primary)'
+                : 'var(--color-text-dim)',
+              lineHeight: '1.6',
+              minHeight: '1.6em',
+            }}
+          >
+            {line.text}
+          </div>
+        ))}
 
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background:
-              'repeating-linear-gradient(transparent 0px, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px)',
-            pointerEvents: 'none',
-            animation: 'scanlines 8s linear infinite',
-            zIndex: 50,
-          }}
-        />
+        {showBar && (
+          <div style={{ marginTop: '24px' }}>
+            <div
+              style={{
+                width: '100%',
+                height: '12px',
+                border: '1px solid var(--color-primary)',
+                background: 'transparent',
+                marginBottom: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: `${progress}%`,
+                  height: '100%',
+                  background: 'var(--color-primary)',
+                  transition: 'width 0.04s linear',
+                }}
+              />
+            </div>
+            <div
+              style={{
+                color: 'var(--color-primary)',
+                fontSize: '14px',
+                textAlign: 'center',
+              }}
+            >
+              LOADING... {progress}%
+            </div>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }
