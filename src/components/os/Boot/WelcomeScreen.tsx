@@ -110,9 +110,8 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
           ▶ START PORTFOLIO
         </button>
 
-        <button
-          onClick={onEnter}
-          className="glow-subtle"
+        <a
+          href="mailto:adityaakuchal@gmail.com"
           style={{
             width: '100%',
             fontFamily: 'var(--font-terminal)',
@@ -123,11 +122,14 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
             color: 'var(--color-primary)',
             border: '2px solid var(--color-primary)',
             cursor: 'pointer',
-            borderRadius: 0,
+            textAlign: 'center',
+            textDecoration: 'none',
+            display: 'block',
+            boxSizing: 'border-box',
           }}
         >
           ✉ CONTACT ADITYA
-        </button>
+        </a>
       </div>
     </div>
   );
