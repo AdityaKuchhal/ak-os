@@ -98,12 +98,12 @@ export default function DesktopIconGrid({ openWindow }: DesktopIconGridProps) {
           bottom: '48px',
           zIndex: 20,
           display: 'grid',
-          gridTemplateColumns: '72px 72px',
+          gridTemplateColumns: '80px 80px',
           gridAutoRows: 'min-content',
           gap: '4px',
           overflowY: 'auto',
           overflowX: 'hidden',
-          width: '152px',
+          width: '168px',
           alignContent: 'start',
         }}
       >
