@@ -46,29 +46,22 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
           animation: 'bootUp 0.3s ease-out forwards',
         }}
       >
-        <svg
-          viewBox="0 0 340 70"
-          width="340"
-          height="70"
-          style={{ marginBottom: '8px', overflow: 'visible' }}
+        <div
+          className="glitch"
+          data-text="ADITYA"
+          style={{
+            fontFamily: 'var(--font-terminal)',
+            fontSize: '56px',
+            fontWeight: 'bold',
+            color: 'rgb(133, 224, 133)',
+            letterSpacing: '10px',
+            marginBottom: '8px',
+            textAlign: 'center',
+            lineHeight: 1.1,
+          }}
         >
-          <text
-            x="50%"
-            y="58"
-            textAnchor="middle"
-            fill="none"
-            stroke="var(--color-primary)"
-            strokeWidth="1"
-            style={{
-              fontFamily: 'var(--font-terminal)',
-              fontSize: '62px',
-              fontWeight: 'bold',
-              letterSpacing: '10px',
-            }}
-          >
-            ADITYA
-          </text>
-        </svg>
+          ADITYA
+        </div>
 
         <p
           style={{

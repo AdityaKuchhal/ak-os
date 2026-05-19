@@ -150,3 +150,44 @@ body::after {
   0%   { bottom: 100%; }
   100% { bottom: -100px; }
 }
+
+@keyframes glitch-anim {
+  0%   { clip: rect(11px, 9999px, 81px, 0); }
+  20%  { clip: rect(96px, 9999px, 5px,  0); }
+  40%  { clip: rect(23px, 9999px, 63px, 0); }
+  60%  { clip: rect(55px, 9999px, 14px, 0); }
+  80%  { clip: rect(8px,  9999px, 29px, 0); }
+  100% { clip: rect(72px, 9999px, 48px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0%   { clip: rect(65px, 9999px, 100px, 0); }
+  20%  { clip: rect(12px, 9999px, 5px,   0); }
+  40%  { clip: rect(87px, 9999px, 19px,  0); }
+  60%  { clip: rect(10px, 9999px, 68px,  0); }
+  80%  { clip: rect(5px,  9999px, 24px,  0); }
+  100% { clip: rect(44px, 9999px, 93px,  0); }
+}
+
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  color: rgb(133, 224, 133);
+}
+.glitch::before {
+  animation: glitch-anim 2s infinite linear;
+  clip: rect(0, 9999px, 0, 0);
+  left: 2px;
+  text-shadow: -1px 0 rgb(255, 0, 0);
+}
+.glitch::after {
+  animation: glitch-anim-2 3s infinite linear;
+  clip: rect(0, 9999px, 0, 0);
+  left: -2px;
+  text-shadow: -1px 0 rgb(0, 0, 255);
+}
