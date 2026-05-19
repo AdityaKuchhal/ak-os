@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import type { App } from '@/types';
 
 interface DesktopIconProps {
@@ -17,6 +17,7 @@ export default function DesktopIcon({
   onOpen,
 }: DesktopIconProps) {
   const lastClickRef = useRef(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
     const now = Date.now();
@@ -33,32 +34,38 @@ export default function DesktopIcon({
   return (
     <div
       onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '72px',
-        padding: '6px 4px',
+        width: '64px',
+        height: '64px',
         cursor: 'pointer',
         background: isSelected
-          ? 'rgba(0, 255, 65, 0.15)'
+          ? 'rgba(133, 224, 133, 0.15)'
+          : isHovered
+          ? 'rgba(133, 224, 133, 0.08)'
           : 'transparent',
         border: isSelected
           ? '1px solid var(--color-primary)'
-          : '1px solid transparent',
+          : isHovered
+          ? '1px dashed var(--color-primary)'
+          : '1px dashed transparent',
         userSelect: 'none',
         gap: '4px',
       }}
     >
       <div
         style={{
-          width: '40px',
-          height: '40px',
+          width: '36px',
+          height: '36px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: isTextIcon ? '18px' : '32px',
+          fontSize: isTextIcon ? '18px' : '30px',
           color: 'var(--color-primary)',
           fontFamily: isTextIcon ? 'var(--font-terminal)' : 'inherit',
           fontWeight: isTextIcon ? 'bold' : 'normal',
@@ -70,12 +77,12 @@ export default function DesktopIcon({
       <span
         style={{
           fontFamily: 'var(--font-terminal)',
-          fontSize: '11px',
+          fontSize: '14px',
           color: isSelected ? 'var(--color-primary)' : 'var(--color-text)',
           textAlign: 'center',
           lineHeight: 1.2,
           wordBreak: 'break-word',
-          maxWidth: '68px',
+          maxWidth: '62px',
         }}
       >
         {app.label}
