@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { BOOT_STORAGE_KEY } from '@/lib/constants/theme';
+import { OS_VERSION } from '@/lib/constants/os';
 
 interface BootSequenceProps {
   onComplete: () => void;
 }
 
 const BOOT_MESSAGES = [
-  'AK-OS v1.0 — BIOS Setup Utility',
+  `AK-OS ${OS_VERSION} — BIOS Setup Utility`,
   'Copyright (c) 2026 Aditya Kuchhal',
   '',
   'Detecting hardware configuration...',
@@ -24,9 +25,9 @@ const BOOT_MESSAGES = [
   '[ OK ] CI/CD pipeline connected',
   '[ OK ] Test framework armed',
   '',
-  'Loading AK-OS v1.0...',
+  `Loading AK-OS ${OS_VERSION}...`,
   'Welcome, Aditya.',
-] as const;
+];
 
 export default function BootSequence({ onComplete }: BootSequenceProps) {
   const [visibleCount, setVisibleCount] = useState(0);

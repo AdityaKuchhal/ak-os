@@ -130,7 +130,7 @@ function getCoffee(): string[] {
 const WELCOME: HistoryEntry = {
   command: '',
   output: [
-    `${OS_NAME} Terminal v1.0`,
+    `${OS_NAME} Terminal ${OS_VERSION}`,
     "Type 'help' for available commands.",
     '',
   ],
