@@ -63,6 +63,11 @@ body {
   color: var(--color-text);
 }
 
+/* Phosphor glow system */
+.glow-bright  { text-shadow: rgb(0, 255, 0) 0px 0px 6px; }
+.glow-medium  { text-shadow: rgb(133, 224, 133) 0px 0px 5px; }
+.glow-subtle  { text-shadow: rgb(71, 235, 71) 0px 0px 4px; }
+
 * {
   font-family: var(--font-terminal), 'Courier New', monospace;
   box-sizing: border-box;
