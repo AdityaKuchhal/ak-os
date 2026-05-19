@@ -43,6 +43,13 @@ export default function StatusBadges() {
       >
         gh GitHub
       </a>
+      <a
+        href="mailto:adityaakuchal@gmail.com"
+        className="glow-subtle"
+        style={{ ...badgeBase, backgroundColor: '#116633' }}
+      >
+        ✉ Contact
+      </a>
     </div>
   );
 }

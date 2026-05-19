@@ -152,6 +152,20 @@ export default function StartMenu({ openWindow, onClose }: StartMenuProps) {
           </div>
         </button>
       ))}
+      <a
+        href="mailto:adityaakuchal@gmail.com"
+        style={{
+          display: 'block',
+          fontFamily: 'var(--font-terminal)',
+          fontSize: '14px',
+          color: 'var(--color-primary)',
+          padding: '6px 12px',
+          textDecoration: 'none',
+          borderTop: '1px solid var(--color-border)',
+        }}
+      >
+        ✉ CONTACT
+      </a>
     </div>
   );
 }
