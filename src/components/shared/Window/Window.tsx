@@ -117,6 +117,8 @@ export default function Window({
     display: win.isMinimized ? 'none' : 'flex',
     flexDirection: 'column',
     pointerEvents: 'auto',
+    boxShadow: 'rgba(0,0,0,0.5) 10px 10px 0px 0px',
+    animation: 'bootUp 0.3s ease-out forwards',
   };
 
   const containerStyle: React.CSSProperties = win.isMaximized
