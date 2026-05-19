@@ -35,7 +35,7 @@ export default function Home() {
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: '2rem', marginBottom: '16px' }}>AK-OS v1.0</div>
+        <div style={{ fontSize: '2rem', marginBottom: '16px' }}>AK-OS v2.0</div>
         <div style={{ fontSize: '1rem', marginBottom: '24px', color: '#008f11' }}>
           SYSTEM ERROR: Display resolution too low
         </div>

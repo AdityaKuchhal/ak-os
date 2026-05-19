@@ -22,7 +22,7 @@ export default function OGImage() {
         }}
       >
         <div style={{ fontSize: 72, fontWeight: 'bold', marginBottom: 16 }}>
-          AK-OS v1.0
+          AK-OS v2.0
         </div>
         <div style={{ fontSize: 32, color: '#008f11', marginBottom: 32 }}>
           Aditya Kuchhal — Software Developer
