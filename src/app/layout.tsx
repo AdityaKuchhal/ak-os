@@ -74,7 +74,34 @@ export default function RootLayout({
       data-theme="matrix"
       className={`${vt323.variable} ${shareTechMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {/* CRT overlay layer 1 — flicker + phosphor grid */}
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0,
+          width: '100%', height: '100%',
+          pointerEvents: 'none',
+          zIndex: 9999,
+          background: `
+            linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%) 0 0 / 100% 2px,
+            linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06)) 0 0 / 3px 100%
+          `,
+          animation: 'flicker 0.15s ease infinite',
+        }} />
+        {/* CRT overlay layer 2 — moving scanline beam */}
+        <div style={{
+          position: 'fixed',
+          width: '100%',
+          height: '100px',
+          zIndex: 9998,
+          pointerEvents: 'none',
+          background: 'linear-gradient(0deg, rgba(0,0,0,0), rgba(255,255,255,0.1), rgba(0,0,0,0))',
+          opacity: 0.1,
+          bottom: '100%',
+          animation: 'scanline 10s linear infinite',
+        }} />
+        {children}
+      </body>
     </html>
   );
 }

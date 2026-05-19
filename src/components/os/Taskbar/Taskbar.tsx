@@ -80,7 +80,6 @@ export default function Taskbar({
             boxShadow: 'rgba(255,255,255,0.2) 2px 2px 0px 0px inset, rgba(0,0,0,0.5) -2px -2px 0px 0px inset',
             whiteSpace: 'nowrap' as const,
           }}
-          className="glow-bright"
         >
           <span style={{ fontSize: '0.75em', marginRight: 2 }}>≡</span>
           {' START'}
@@ -111,7 +110,6 @@ export default function Taskbar({
               if (w.isMinimized) onMinimizeWindow(w.id);
               onFocusWindow(w.id);
             }}
-            className="glow-subtle"
             style={{
               ...btnBase,
               maxWidth: 140,
@@ -127,7 +125,6 @@ export default function Taskbar({
 
       {/* Right: live clock */}
       <div
-        className="glow-subtle"
         style={{
           color: 'rgb(5, 5, 5)',
           fontSize: '0.9rem',
