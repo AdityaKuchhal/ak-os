@@ -73,7 +73,7 @@ export default function WelcomeScreen({ onEnter }: WelcomeScreenProps) {
             textAlign: 'center',
           }}
         >
-          Welcome to AK-OS v1.0
+          Welcome to AK-OS v2.0
         </p>
 
         <p

@@ -1,5 +1,5 @@
 export const OS_NAME = 'AK-OS';
-export const OS_VERSION = 'v1.0';
+export const OS_VERSION = 'v2.0';
 
 export const OWNER = {
   name: 'Aditya Kuchhal',
