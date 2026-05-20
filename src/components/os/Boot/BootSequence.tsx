@@ -5,14 +5,14 @@ import { OS_NAME, OS_VERSION } from '@/lib/constants/os';
 
 const BOOT_LINES = [
   { text: `${OS_NAME} ${OS_VERSION} — BIOS Setup Utility`, bright: false },
-  { text: 'Copyright (c) 2026 Aditya Kuchhal', bright: false },
+  { text: 'Copyright (c) 2026 Aditya Kuchhal', bright: true },
   { text: '', bright: false },
   { text: 'Detecting hardware configuration...', bright: false },
-  { text: 'CPU: Software Developer @ 3.6GHz', bright: false },
-  { text: 'RAM: 8192MB — Python · Java · TypeScript', bright: false },
-  { text: 'GPU: React 19 + Next.js 15 detected', bright: false },
-  { text: 'STORAGE: PostgreSQL · MongoDB · Redis', bright: false },
-  { text: 'NETWORK: AWS · Docker · GitHub Actions', bright: false },
+  { text: 'CPU: Software Developer @ 3.6GHz', bright: true },
+  { text: 'RAM: 8192MB — Python · Java · TypeScript', bright: true },
+  { text: 'GPU: React 19 + Next.js 15 detected', bright: true },
+  { text: 'STORAGE: PostgreSQL · MongoDB · Redis', bright: true },
+  { text: 'NETWORK: AWS · Docker · GitHub Actions', bright: true },
   { text: '', bright: false },
   { text: 'Loading AK-OS Kernel..............', bright: false },
   { text: 'Running POST diagnostics...', bright: false },
@@ -30,8 +30,11 @@ interface BootSequenceProps {
 
 export default function BootSequence({ onComplete }: BootSequenceProps) {
   const [visibleLines, setVisibleLines] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [showBar, setShowBar] = useState(false);
+
+  const progress = Math.min(
+    100,
+    Math.round((visibleLines / BOOT_LINES.length) * 100)
+  );
 
   useEffect(() => {
     const lineInterval = setInterval(() => {
@@ -40,33 +43,19 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
           clearInterval(lineInterval);
           return prev;
         }
-        return prev + 1;
+        return prev + 4;
       });
     }, 200);
 
-    const barTimeout = setTimeout(() => setShowBar(true), 200);
+    return () => clearInterval(lineInterval);
+  }, []);
 
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 60);
-
-    const completeTimeout = setTimeout(() => {
-      onComplete();
-    }, 5000);
-
-    return () => {
-      clearInterval(lineInterval);
-      clearInterval(progressInterval);
-      clearTimeout(barTimeout);
-      clearTimeout(completeTimeout);
-    };
-  }, [onComplete]);
+  useEffect(() => {
+    if (visibleLines >= BOOT_LINES.length) {
+      const completeTimer = setTimeout(() => onComplete(), 800);
+      return () => clearTimeout(completeTimer);
+    }
+  }, [visibleLines, onComplete]);
 
   return (
     <div
@@ -97,37 +86,35 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
           </div>
         ))}
 
-        {showBar && (
-          <div style={{ marginTop: '24px' }}>
+        <div style={{ marginTop: '24px' }}>
+          <div
+            style={{
+              width: '100%',
+              height: '12px',
+              border: '1px solid var(--color-primary)',
+              background: 'transparent',
+              marginBottom: '8px',
+            }}
+          >
             <div
               style={{
-                width: '100%',
-                height: '12px',
-                border: '1px solid var(--color-primary)',
-                background: 'transparent',
-                marginBottom: '8px',
+                width: `${progress}%`,
+                height: '100%',
+                background: 'var(--color-primary)',
+                transition: 'width 0.04s linear',
               }}
-            >
-              <div
-                style={{
-                  width: `${progress}%`,
-                  height: '100%',
-                  background: 'var(--color-primary)',
-                  transition: 'width 0.04s linear',
-                }}
-              />
-            </div>
-            <div
-              style={{
-                color: 'var(--color-primary)',
-                fontSize: '14px',
-                textAlign: 'center',
-              }}
-            >
-              LOADING... {progress}%
-            </div>
+            />
           </div>
-        )}
+          <div
+            style={{
+              color: 'var(--color-primary)',
+              fontSize: '14px',
+              textAlign: 'center',
+            }}
+          >
+            LOADING... {progress}%
+          </div>
+        </div>
       </div>
     </div>
   );
