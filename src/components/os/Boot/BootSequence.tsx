@@ -42,7 +42,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
         }
         return prev + 1;
       });
-    }, 120);
+    }, 200);
 
     const barTimeout = setTimeout(() => setShowBar(true), 200);
 
@@ -52,13 +52,13 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 2;
+        return prev + 1;
       });
-    }, 40);
+    }, 60);
 
     const completeTimeout = setTimeout(() => {
       onComplete();
-    }, 2800);
+    }, 5000);
 
     return () => {
       clearInterval(lineInterval);
@@ -88,9 +88,7 @@ export default function BootSequence({ onComplete }: BootSequenceProps) {
           <div
             key={i}
             style={{
-              color: line.bright
-                ? 'var(--color-primary)'
-                : 'var(--color-text-dim)',
+              color: line.bright ? '#ffffff' : 'var(--color-primary)',
               lineHeight: '1.6',
               minHeight: '1.6em',
             }}
